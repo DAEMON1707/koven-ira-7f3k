@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1a0d33">
+<title>Ирина, вам депеша из Ковена</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Neucha&family=Ruslan+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="sky" id="sky">
+    <div class="moon"></div>
+    <div class="hills"></div>
+  </div>
+
+  <div class="topbar">
+    <div class="progress" id="progress">🧪 Зелье: <b id="progressNum">0</b>/<span id="progressTotal">7</span></div>
+    <button class="mute" id="mute" aria-label="Звук">🔊</button>
+  </div>
+
+  <section class="scene" id="intro">
+    <div class="letter" id="letter">
+      <div class="letter-head">Срочная депеша</div>
+      <div class="letter-row"><span>Кому:</span> Ирине</div>
+      <div class="letter-row"><span>От:</span> Верховного Ковена Ведьм</div>
+      <div class="letter-row"><span>Тема:</span> Ваша заявка рассмотрена</div>
+      <div class="letter-note">Вскрыть лично. Коле и Матвею не показывать (Матвею можно, он всё равно уже всё видел).</div>
+      <button class="seal" id="seal" aria-label="Сломать печать">✦</button>
+      <div class="seal-hint">Тапни по печати</div>
+    </div>
+    <div class="sound-hint">🔊 Сделай погромче</div>
+  </section>
+
+  <section class="scene hidden" id="stage">
+    <div id="bubble" class="bubble"><span id="bubbleText"></span><i class="bubble-tap">▸ тапни</i></div>
+
+    <div id="cauldron" class="cauldron">
+      <div class="glow"></div>
+      <div class="bubbles" id="bubbles"></div>
+      <svg viewBox="0 0 200 200" class="pot">
+        <g class="ladle">
+          <rect x="118" y="-30" width="9" height="110" rx="4" fill="#8a5a2b" transform="rotate(18 122 60)"/>
+        </g>
+        <g class="fire">
+          <path class="f1" d="M50 200 Q40 170 62 150 Q60 172 78 168 Q72 148 92 132 Q92 160 108 158 Q104 140 122 130 Q126 160 140 156 Q138 140 152 150 Q166 172 150 200 Z" fill="#ff7b1c"/>
+          <path class="f2" d="M70 200 Q64 180 80 168 Q82 182 94 180 Q92 164 106 154 Q108 176 120 174 Q122 162 132 168 Q142 184 132 200 Z" fill="#ffd23c"/>
+        </g>
+        <path d="M42 150 L30 182 L42 182 L56 156 Z M158 150 L170 182 L158 182 L144 156 Z" fill="#1b1b22"/>
+        <path d="M18 72 Q6 160 100 168 Q194 160 182 72 Z" fill="#26232e"/>
+        <path d="M34 92 Q34 140 74 152" stroke="#4a4656" stroke-width="6" fill="none" stroke-linecap="round" opacity=".7"/>
+        <ellipse cx="100" cy="72" rx="90" ry="18" fill="#3a3644"/>
+        <ellipse cx="100" cy="72" rx="78" ry="12" class="potion"/>
+        <ellipse cx="78" cy="69" rx="22" ry="3" fill="#fff" opacity=".35"/>
+      </svg>
+    </div>
+
+    <div id="shelf" class="shelf"></div>
+  </section>
+
+  <div id="witch" class="witch"><div class="witch-inner" id="witchInner"></div></div>
+
+  <section class="scene hidden" id="final">
+    <div class="final-kicker">✦ Свершилось ✦</div>
+    <div class="portrait" id="portrait">
+      <div class="ph-wrap" id="phWrap"></div>
+    </div>
+    <h1 class="final-title">Ирина стала ведьмой!</h1>
+    <p class="final-sub">Окружающие, в общем-то, давно догадывались. Теперь это официально.</p>
+
+    <div class="diploma">
+      <div class="dip-head">ДИПЛОМ</div>
+      <div class="dip-sub">ведьмы высшей категории</div>
+      <p class="dip-intro">Верховный Ковен удостоверяет, что Ирина получает следующие права и умения:</p>
+      <ul class="dip-list" id="dipList"></ul>
+      <div class="stamp">КОВЕН<br>✦ ОДОБРЕНО ✦</div>
+    </div>
+
+    <div class="wish" id="wish"></div>
+    <div class="sign" id="sign"></div>
+
+    <div class="ps">
+      <div class="ps-witch" id="sootyWitch"></div>
+      <div class="ps-text">P.S. от ведьмы: «Я в порядке! Сейчас схожу отмыться в баню, а метлу верну на WB, возврат уже оформила».</div>
+    </div>
+
+    <div class="final-btns">
+      <button class="btn" id="openBook">📖 Книга заклинаний</button>
+      <button class="btn btn-ghost" id="replay">🔁 Сварить ещё раз</button>
+    </div>
+  </section>
+
+  <div class="overlay" id="cardWrap">
+    <div class="card" id="card"></div>
+  </div>
+
+  <div class="overlay" id="book">
+    <div class="card book-card">
+      <h3>📖 Книга заклинаний</h3>
+      <div id="bookList"></div>
+      <button class="btn" id="closeBook">Закрыть</button>
+    </div>
+  </div>
+
+  <div id="fx"></div>
+  <canvas id="confetti"></canvas>
+  <div id="flash"></div>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
