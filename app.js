@@ -11,7 +11,7 @@
 
     function init() {
       try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
-      if (ctx) { if (ctx.state !== 'running') ctx.resume(); return; }
+      if (ctx) { if (!muted && ctx.state !== 'running') ctx.resume(); return; }
       const AC = window.AudioContext || window.webkitAudioContext;
       if (!AC) return;
       ctx = new AC();
